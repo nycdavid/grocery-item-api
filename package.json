@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "git@github.com:nycdavid/grocery-item-api.git",
   "author": "David Ko <david.ko@velvetreactor.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.4.1"
+  }
 }
