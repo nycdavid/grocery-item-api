@@ -1,0 +1,9 @@
+{
+  "name": "grocery-item-api",
+  "version": "1.0.0",
+  "description": "Groceries API. Written in nodejs and Koa",
+  "main": "index.js",
+  "repository": "git@github.com:nycdavid/grocery-item-api.git",
+  "author": "David Ko <david.ko@velvetreactor.com>",
+  "license": "MIT"
+}
