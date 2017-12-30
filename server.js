@@ -1,15 +1,17 @@
 const Koa = require('koa');
+const _ = require('koa-route');
 const app = new Koa();
+const axios = require('axios');
 const Port = 1337;
 
-// Logger
-app.use(async (ctx, next) => {
-  
-});
+const PagesController = {
+  index: ctx => {
+    ctx.body = 'PagesController#index'
+  }
+}
 
-app.use(async ctx => {
-  ctx.body = 'Hello World!';
-});
+// Routing
+app.use(_.get('/home', PagesController.index));
 
 app.listen(Port);
 console.log(`Listening on port ${Port}...`)
