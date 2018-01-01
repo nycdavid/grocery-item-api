@@ -1,2 +1,2 @@
-server:
-	node server.js
+dev:
+	atom . && node server.js
