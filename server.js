@@ -4,6 +4,7 @@ const app = new Koa();
 const axios = require('axios');
 const Port = 1337;
 const ItemsController = require('./controllers/items_controller.js');
+const mongooseInit = require('./config/mongoose.js')
 
 const PagesController = {
   home: ctx => {
@@ -13,7 +14,8 @@ const PagesController = {
 
 // Routing
 app.use(_.get('/', PagesController.home));
-app.use(_.post('/items', ItemsController.create))
+app.use(_.get('/items', ItemsController.index));
+app.use(_.post('/items', ItemsController.create));
 
 app.listen(Port);
 console.log(`Listening on port ${Port}...`)
