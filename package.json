@@ -8,9 +8,16 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",
+    "chai": "^4.1.2",
     "koa": "^2.4.1",
     "koa-route": "^3.2.0",
+    "mocha": "^4.1.0",
     "mongoose": "^5.0.0-rc0",
-    "superagent": "^3.8.2"
+    "superagent": "^3.8.2",
+    "supertest": "^3.0.0"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test mocha --exit",
+    "run": "NODE_ENV=development node server.js"
   }
 }
