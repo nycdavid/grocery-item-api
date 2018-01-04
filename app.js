@@ -1,7 +1,11 @@
 const Koa = require('koa');
+const bodyParser = require('koa-bodyparser');
 const _ = require('koa-route');
 const App = new Koa();
 const mongooseInit = require('./config/mongoose.js')
+
+// Middleware
+App.use(bodyParser());
 
 // Controllers
 const ItemsController = require('./controllers/items_controller.js');

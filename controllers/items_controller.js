@@ -5,21 +5,17 @@ const ItemsController = {
     let items = await Item.find();
     ctx.body = { items: items };
   },
-  create: ctx => {
-    let body = [];
-    ctx.req.on('data', chunk => {
-      body.push(chunk);
-    }).on('end', async () => {
-      let reqBody = JSON.parse(Buffer.concat(body).toString());
-      let item = new Item({ name: reqBody.item.name, price: reqBody.item.price });
-      item.save();
-      ctx.body = item;
-      // try {
-      //   let i = await item.save();
-      // } catch (e) {
-      //   console.log(e);
-      // }
-    });
+  create: async ctx => {
+    let reqBody = ctx.request.body;
+    let item = new Item(reqBody.item);
+    let saved;
+    try {
+      saved = await item.save()
+    } catch(e) {
+      console.log(e);
+    }
+    ctx.response.status = 201;
+    ctx.body = saved;
   }
 };
 

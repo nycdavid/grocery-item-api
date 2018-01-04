@@ -2,6 +2,7 @@ const expect = require('chai').expect;
 const App = require('../app.js')
 const request = require('supertest');
 const testHelper = require('./test_helper.js');
+const Mongoose = require('mongoose');
 
 let server;
 
@@ -11,6 +12,7 @@ beforeEach(() => {
 
 afterEach(() => {
   server.close();
+  Mongoose.connection.db.dropDatabase();
 });
 
 describe('GET /items', () => {
