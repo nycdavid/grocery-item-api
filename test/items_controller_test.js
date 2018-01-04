@@ -32,7 +32,7 @@ describe('POST /items', () => {
       .send({ item: itemPayload });
 
     expect(res.status).to.equal(201);
-    expect(res.body.name).to.equal('Water');
+    expect(res.body.item.name).to.equal('Water');
   });
 });
 
@@ -47,9 +47,29 @@ describe('DELETE /items/:id', () => {
     }
 
     let res = await request(server).delete(`/items/${item.id}`);
-    let found = await Item.findById(`${item.id}`);
+    let found = await Item.findById(item.id);
 
     expect(res.status).to.equal(202);
     expect(found).to.equal(null);
+  });
+});
+
+describe('PUT /items/:id', () => {
+  it('updates the item', async () => {
+    let testItem = { name: 'Coconut Oil', price: 5.99 };
+    let item = new Item(testItem);
+    try {
+      await item.save();
+    } catch(e) {
+      throw e;
+    }
+
+    let res = await request(server).put(`/items/${item.id}`)
+      .send({ item: { name: 'Coconut Oil', price: 7.99 } });
+    let found = await Item.findById(item.id);
+
+    expect(res.status).to.equal(201);
+    expect(res.body.item).to.include.keys('name', 'price');
+    expect(found.price).to.equal(7.99);
   });
 });

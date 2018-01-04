@@ -15,7 +15,7 @@ const ItemsController = {
       console.log(e);
     }
     ctx.response.status = 201;
-    ctx.body = saved;
+    ctx.body = { item: saved };
   },
   delete: async (ctx, id) => {
     let item = await Item.findById(id);
@@ -25,6 +25,17 @@ const ItemsController = {
       ctx.response.status = 500;
     }
     ctx.response.status = 202;
+  },
+  update: async (ctx, id) => {
+    let reqBody = ctx.request.body;
+    try {
+      await Item.findByIdAndUpdate(id, reqBody.item);
+    } catch(e) {
+      ctx.response.status = 500;
+    }
+    let updatedItem = await Item.findById(id);
+    ctx.response.status = 201;
+    ctx.body = { item: updatedItem };
   }
 };
 

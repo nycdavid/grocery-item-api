@@ -14,5 +14,6 @@ const ItemsController = require('./controllers/items_controller.js');
 App.use(_.get('/items', ItemsController.index));
 App.use(_.post('/items', ItemsController.create));
 App.use(_.delete('/items/:id', ItemsController.delete));
+App.use(_.put('/items/:id', ItemsController.update));
 
 module.exports = App;
