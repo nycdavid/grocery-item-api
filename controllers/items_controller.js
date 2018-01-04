@@ -16,6 +16,15 @@ const ItemsController = {
     }
     ctx.response.status = 201;
     ctx.body = saved;
+  },
+  delete: async (ctx, id) => {
+    let item = await Item.findById(id);
+    try {
+      let ok = await item.remove()
+    } catch(e) {
+      ctx.response.status = 500;
+    }
+    ctx.response.status = 202;
   }
 };
 

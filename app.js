@@ -13,5 +13,6 @@ const ItemsController = require('./controllers/items_controller.js');
 // Routing
 App.use(_.get('/items', ItemsController.index));
 App.use(_.post('/items', ItemsController.create));
+App.use(_.delete('/items/:id', ItemsController.delete));
 
 module.exports = App;

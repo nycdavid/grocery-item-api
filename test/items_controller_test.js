@@ -3,6 +3,7 @@ const App = require('../app.js')
 const request = require('supertest');
 const testHelper = require('./test_helper.js');
 const Mongoose = require('mongoose');
+const Item = require('../models/item.js')
 
 let server;
 
@@ -25,12 +26,30 @@ describe('GET /items', () => {
 });
 
 describe('POST /items', () => {
-  it('creates the object', async() => {
+  it('creates the item', async () => {
     let itemPayload = { name: 'Water', price: 5.19 };
     const res = await request(server).post('/items')
       .send({ item: itemPayload });
 
     expect(res.status).to.equal(201);
     expect(res.body.name).to.equal('Water');
+  });
+});
+
+describe('DELETE /items/:id', () => {
+  it('deletes the item', async () => {
+    let testItem = { name: 'Coconut Oil', price: 5.99 };
+    let item = new Item(testItem);
+    try {
+      await item.save();
+    } catch(e) {
+      throw e;
+    }
+
+    let res = await request(server).delete(`/items/${item.id}`);
+    let found = await Item.findById(`${item.id}`);
+
+    expect(res.status).to.equal(202);
+    expect(found).to.equal(null);
   });
 });
