@@ -2,7 +2,10 @@ const Mongoose = require('mongoose');
 const Schema = Mongoose.Schema;
 
 const ItemSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: [true, 'cannot be blank']
+  },
   price: Number
 });
 

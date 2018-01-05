@@ -26,13 +26,26 @@ describe('GET /items', () => {
 });
 
 describe('POST /items', () => {
+  let itemPayload;
+  beforeEach(() => {
+    itemPayload = { name: 'Water', price: 5.19 };
+  });
+
   it('creates the item', async () => {
-    let itemPayload = { name: 'Water', price: 5.19 };
     const res = await request(server).post('/items')
       .send({ item: itemPayload });
 
     expect(res.status).to.equal(201);
     expect(res.body.item.name).to.equal('Water');
+  });
+
+  it('rejects an item if it\'s missing an attribute', async() => {
+    itemPayload.name = '';
+    const res = await request(server).post('/items')
+      .send({ item: itemPayload });
+
+    expect(res.status).to.equal(400);
+    expect(res.body.errors[0]).to.include({ attribute: 'name' });
   });
 });
 

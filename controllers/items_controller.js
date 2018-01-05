@@ -1,4 +1,5 @@
 const Item = require('../models/item.js');
+const ErrorSerializer = require('../lib/error_serializer.js');
 
 const ItemsController = {
   index: async ctx => {
@@ -12,7 +13,9 @@ const ItemsController = {
     try {
       saved = await item.save()
     } catch(e) {
-      console.log(e);
+      const errors = new ErrorSerializer(e);
+      ctx.response.status = errors.statusCode();
+      return ctx.body = { errors: errors.body };
     }
     ctx.response.status = 201;
     ctx.body = { item: saved };
