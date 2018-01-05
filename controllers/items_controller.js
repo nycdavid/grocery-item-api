@@ -19,6 +19,9 @@ const ItemsController = {
   },
   delete: async (ctx, id) => {
     let item = await Item.findById(id);
+    if (item === null){
+      return ctx.response.status = 404;
+    }
     try {
       let ok = await item.remove()
     } catch(e) {

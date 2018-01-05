@@ -52,6 +52,12 @@ describe('DELETE /items/:id', () => {
     expect(res.status).to.equal(202);
     expect(found).to.equal(null);
   });
+
+  it('returns a 404 for an invalid id', async() => {
+    const res = await request(server).delete('/items/507f1f77bcf86cd799439011')
+
+    expect(res.status).to.equal(404);
+  });
 });
 
 describe('PUT /items/:id', () => {
