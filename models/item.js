@@ -6,7 +6,9 @@ const ItemSchema = new Schema({
     type: String,
     required: [true, 'cannot be blank']
   },
-  price: Number
+  price: Number,
+  vendor: String,
+  nameByVendor: String
 });
 
 const Item = Mongoose.model('Item', ItemSchema);

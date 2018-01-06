@@ -24,6 +24,6 @@
   },
   "scripts": {
     "test": "NODE_ENV=test mocha --exit",
-    "run": "NODE_ENV=development node server.js"
+    "start": "NODE_ENV=development node server.js"
   }
 }

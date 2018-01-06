@@ -26,7 +26,7 @@ const ItemsController = {
       return ctx.response.status = 404;
     }
     try {
-      let ok = await item.remove()
+      await item.remove()
     } catch(e) {
       ctx.response.status = 500;
     }
